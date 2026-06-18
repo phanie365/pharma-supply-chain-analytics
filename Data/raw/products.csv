@@ -1,0 +1,51 @@
+product_id,product_name,category,manufacturer,dosage,form,storage_temp,unit_price,status
+P001,Doliprane,Endocrinology,Merck,5mg/ml,Cream,15-25°C,94.65,Discontinued
+P002,Amoxicilline,Respiratory,Novartis,100mg,Syrup,15-25°C,91.8,Active
+P003,Ibuprofene,Antiallergic,Bayer,100mg,Syrup,2-8°C,54.14,Active
+P004,Paracetamol,Cardiovascular,Sanofi,100mg,Inhaler,2-8°C,84.14,Active
+P005,Augmentin,Endocrinology,Roche,100mg,Injection,15-25°C,19.96,Active
+P006,Ventoline,Dermatology,Pfizer,1g,Capsule,Below 30°C,28.3,Discontinued
+P007,Efferalgan,Anti-inflammatory,AstraZeneca,500mg,Capsule,15-25°C,67.28,Active
+P008,Spasfon,Endocrinology,Roche,500mg,Cream,Below 30°C,80.82,Active
+P009,Kardegic,Antiallergic,Pfizer,100mg,Inhaler,15-25°C,81.71,Active
+P010,Aerius,Cardiovascular,Bayer,500mg,Tablet,15-25°C,39.92,Discontinued
+P011,Dafalgan,Respiratory,Bayer,500mg,Cream,15-25°C,84.62,Active
+P012,Smecta,Antiallergic,Bayer,100mg,Inhaler,15-25°C,81.21,Active
+P013,Forlax,Antiallergic,Pfizer,500mg,Injection,2-8°C,89.05,Active
+P014,Lovenox,Anti-inflammatory,Roche,5mg/ml,Injection,15-25°C,75.14,Active
+P015,Plavix,Gastrointestinal,Bayer,250mg,Injection,15-25°C,64.38,Active
+P016,Toplexil,Cardiovascular,GSK,250mg,Injection,15-25°C,56.21,Active
+P017,Levothyrox,Antibiotic,Merck,100mg,Injection,15-25°C,36.94,Active
+P018,Zyrtec,Antiallergic,Pfizer,1g,Inhaler,15-25°C,89.46,Active
+P019,Mopral,Gastrointestinal,Pfizer,100mg,Inhaler,15-25°C,92.56,Discontinued
+P020,Gaviscon,Antibiotic,Roche,1g,Syrup,15-25°C,28.76,Active
+P021,Tramadol,Cardiovascular,Pfizer,250mg,Capsule,2-8°C,30.75,Active
+P022,Cefixime,Analgesic,Pfizer,100mg,Injection,15-25°C,47.42,Active
+P023,Azithromycine,Dermatology,Bayer,5mg/ml,Tablet,Below 30°C,43.98,Active
+P024,Metformine,Gastrointestinal,Roche,500mg,Inhaler,15-25°C,94.49,Active
+P025,Insuline,Anticoagulant,Bayer,1g,Tablet,2-8°C,18.77,Active
+P026,Amlodipine,Analgesic,Merck,500mg,Tablet,2-8°C,4.17,Active
+P027,Ramipril,Dermatology,AstraZeneca,500mg,Tablet,15-25°C,48.19,Active
+P028,Omeprazole,Anti-inflammatory,Merck,100mg,Syrup,15-25°C,19.04,Active
+P029,Prednisone,Endocrinology,AstraZeneca,500mg,Inhaler,2-8°C,36.4,Active
+P030,Furosemide,Respiratory,Bayer,5mg/ml,Tablet,2-8°C,71.34,Active
+P031,Loratadine,Anticoagulant,Merck,500mg,Injection,15-25°C,69.19,Active
+P032,Cetirizine,Anti-inflammatory,Roche,100mg,Cream,15-25°C,31.0,Active
+P033,Fluconazole,Cardiovascular,Sanofi,5mg/ml,Tablet,2-8°C,52.68,Active
+P034,Ketoprofene,Anti-inflammatory,Bayer,250mg,Syrup,2-8°C,49.57,Active
+P035,Biseptine,Endocrinology,AstraZeneca,500mg,Inhaler,15-25°C,61.36,Active
+P036,Sertraline,Cardiovascular,GSK,100mg,Syrup,15-25°C,25.67,Active
+P037,Atorvastatine,Anticoagulant,AstraZeneca,250mg,Tablet,Below 30°C,57.06,Active
+P038,Rivaroxaban,Endocrinology,GSK,250mg,Inhaler,15-25°C,93.05,Active
+P039,Bisoprolol,Antibiotic,Pfizer,1g,Cream,15-25°C,47.52,Active
+P040,Salbutamol,Respiratory,Merck,5mg/ml,Tablet,2-8°C,86.31,Active
+P041,Clamoxyl,Anticoagulant,GSK,500mg,Syrup,2-8°C,42.68,Active
+P042,Flagyl,Antibiotic,AstraZeneca,100mg,Capsule,2-8°C,34.88,Active
+P043,Cortancyl,Dermatology,Pfizer,1g,Injection,15-25°C,62.17,Active
+P044,Eliquis,Anticoagulant,Sanofi,5mg/ml,Syrup,15-25°C,64.38,Active
+P045,Xarelto,Dermatology,Roche,1g,Inhaler,2-8°C,82.44,Active
+P046,Humalog,Cardiovascular,Roche,5mg/ml,Tablet,15-25°C,23.79,Active
+P047,Lantus,Antibiotic,Roche,5mg/ml,Injection,15-25°C,48.68,Active
+P048,Inexium,Respiratory,GSK,500mg,Tablet,Below 30°C,55.41,Active
+P049,Doxycycline,Endocrinology,Sanofi,5mg/ml,Inhaler,15-25°C,73.59,Discontinued
+P050,Nurofen,Antiallergic,GSK,1g,Tablet,15-25°C,6.53,Active

@@ -1,0 +1,11 @@
+warehouse_id,warehouse_name,country,city,warehouse_type,capacity_units,manager_name
+WH001,Paris Distribution Center,France,Paris,Cold Chain,84021,Martin Dupont
+WH002,Lyon Distribution Center,France,Lyon,Central,96412,Claire Bernard
+WH003,Berlin Distribution Center,Germany,Berlin,Central,88335,Hans Muller
+WH004,Munich Distribution Center,Germany,Munich,Regional,86179,Anna Schmidt
+WH005,Madrid Distribution Center,Spain,Madrid,Regional,62093,Carlos Garcia
+WH006,Barcelona Distribution Center,Spain,Barcelona,Regional,99678,Lucia Fernandez
+WH007,Milan Distribution Center,Italy,Milan,Cold Chain,110738,Marco Rossi
+WH008,Rome Distribution Center,Italy,Rome,Central,69734,Giulia Romano
+WH009,Brussels Distribution Center,Belgium,Brussels,Cold Chain,102615,Sophie Peeters
+WH010,Amsterdam Distribution Center,Netherlands,Amsterdam,Regional,103523,Eva De Vries
