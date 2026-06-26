@@ -1,0 +1,9 @@
+supplier_id,supplier_name,country,lead_time_days,contact_email,status
+SUP001,MediSupply Europe,France,5,contact@medisupply.eu,Active
+SUP002,PharmaLogistics,Germany,8,orders@pharmalogistics.eu,Inactive
+SUP003,BioHealth Distribution,Spain,12,supply@biohealth.eu,Active
+SUP004,EuroMeds,Italy,7,orders@euromeds.eu,Active
+SUP005,Global Pharma Supply,Belgium,10,contact@globalpharma.eu,Active
+SUP006,HealthChain Partners,Netherlands,6,ops@healthchain.eu,Active
+SUP007,ColdMed Logistics,France,4,coldchain@coldmed.eu,Active
+SUP008,LifeCare Suppliers,Germany,9,supplier@lifecare.eu,Active
