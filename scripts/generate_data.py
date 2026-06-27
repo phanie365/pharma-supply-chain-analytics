@@ -8,6 +8,8 @@ RAW_PATH = Path("data/raw")
 RAW_PATH.mkdir(parents=True, exist_ok=True)
 
 TODAY = pd.Timestamp("2026-06-26")
+START_DATE = pd.Timestamp("2025-01-01")
+DAYS_RANGE = (TODAY - START_DATE).days
 
 
 def generate_suppliers():
@@ -135,13 +137,12 @@ def generate_sales_orders(products, warehouses):
 
     sales = pd.DataFrame({
         "sales_order_id": [f"SO{i:06d}" for i in range(1, n + 1)],
-        "order_date": [TODAY - pd.Timedelta(days=int(x)) for x in np.random.randint(0, 365, n)],
+        "order_date": [TODAY - pd.Timedelta(days=int(x)) for x in np.random.randint(0, DAYS_RANGE, n)],
         "product_id": np.random.choice(products["product_id"], n),
         "warehouse_id": np.random.choice(warehouses["warehouse_id"], n),
         "customer_type": np.random.choice(
             ["Pharmacy", "Hospital", "Clinic", "Distributor"],
-            n,
-            p=[0.45, 0.30, 0.15, 0.10]
+            n, p=[0.45, 0.30, 0.15, 0.10]
         ),
         "quantity_ordered": np.random.randint(10, 600, n)
     })
@@ -164,19 +165,16 @@ def generate_supplier_orders(products, warehouses, suppliers):
         "supplier_id": np.random.choice(suppliers["supplier_id"], n),
         "product_id": np.random.choice(products["product_id"], n),
         "warehouse_id": np.random.choice(warehouses["warehouse_id"], n),
-        "order_date": [TODAY - pd.Timedelta(days=int(x)) for x in np.random.randint(0, 365, n)],
+        "order_date": [TODAY - pd.Timedelta(days=int(x)) for x in np.random.randint(0, DAYS_RANGE, n)],
         "quantity_ordered": np.random.randint(100, 5000, n)
     })
 
     supplier_orders = supplier_orders.merge(
-        suppliers[["supplier_id", "supplier_name"]],
-        on="supplier_id",
-        how="left"
+        suppliers[["supplier_id", "supplier_name"]], on="supplier_id", how="left"
     )
 
     supplier_orders["expected_delivery_date"] = supplier_orders["order_date"] + pd.to_timedelta(
-        np.random.randint(3, 21, n),
-        unit="D"
+        np.random.randint(3, 21, n), unit="D"
     )
 
     late_flags = np.random.choice([0, 1], n, p=[0.85, 0.15])
@@ -194,31 +192,23 @@ def generate_supplier_orders(products, warehouses, suppliers):
     supplier_orders["quantity_received"] = (supplier_orders["quantity_ordered"] * received_rate).astype(int)
 
     supplier_orders["order_status"] = np.where(
-        supplier_orders["actual_delivery_date"] > TODAY,
-        "Open",
+        supplier_orders["actual_delivery_date"] > TODAY, "Open",
         np.where(
             supplier_orders["quantity_received"] >= supplier_orders["quantity_ordered"],
-            "Delivered",
-            "Partially Delivered"
+            "Delivered", "Partially Delivered"
         )
     )
 
-    return supplier_orders[
-        [
-            "supplier_order_id", "supplier_id", "supplier_name",
-            "product_id", "warehouse_id", "order_date",
-            "expected_delivery_date", "actual_delivery_date",
-            "quantity_ordered", "quantity_received", "order_status"
-        ]
-    ]
+    return supplier_orders[[
+        "supplier_order_id", "supplier_id", "supplier_name",
+        "product_id", "warehouse_id", "order_date",
+        "expected_delivery_date", "actual_delivery_date",
+        "quantity_ordered", "quantity_received", "order_status"
+    ]]
 
 
 def generate_calendar():
-    dates = pd.date_range(
-        start=TODAY - pd.Timedelta(days=365),
-        end=TODAY + pd.Timedelta(days=365),
-        freq="D"
-    )
+    dates = pd.date_range(start=START_DATE, end=TODAY, freq="D")
 
     return pd.DataFrame({
         "date_key": dates.strftime("%Y%m%d").astype(int),
@@ -278,14 +268,12 @@ def generate_alerts(inventory, products, warehouses, suppliers):
     alerts["created_at"] = TODAY
     alerts["alert_id"] = [f"ALT{i:06d}" for i in range(1, len(alerts) + 1)]
 
-    return alerts[
-        [
-            "alert_id", "created_at", "product_id", "product_name",
-            "warehouse_id", "warehouse_name", "supplier_id", "supplier_name",
-            "alert_type", "severity", "quantity_on_hand",
-            "reorder_threshold", "days_to_expiry", "status"
-        ]
-    ]
+    return alerts[[
+        "alert_id", "created_at", "product_id", "product_name",
+        "warehouse_id", "warehouse_name", "supplier_id", "supplier_name",
+        "alert_type", "severity", "quantity_on_hand",
+        "reorder_threshold", "days_to_expiry", "status"
+    ]]
 
 
 def inject_quality_issues(products, warehouses, inventory, sales_orders, supplier_orders):
@@ -295,17 +283,14 @@ def inject_quality_issues(products, warehouses, inventory, sales_orders, supplie
     sales_orders = sales_orders.copy()
     supplier_orders = supplier_orders.copy()
 
-    # Missing values
     products.loc[products.sample(frac=0.04, random_state=1).index, "manufacturer"] = np.nan
     products.loc[products.sample(frac=0.04, random_state=2).index, "storage_temp"] = np.nan
     warehouses.loc[warehouses.sample(n=1, random_state=3).index, "manager_name"] = np.nan
 
-    # Label inconsistencies
     warehouses.loc[0, "country"] = "FRANCE"
     warehouses.loc[1, "country"] = "france"
     sales_orders.loc[sales_orders.sample(frac=0.02, random_state=4).index, "customer_type"] = "hospital"
 
-    # Negative and incoherent values
     inventory.loc[inventory.sample(n=3, random_state=5).index, "quantity_on_hand"] = -10
     products.loc[products.sample(n=1, random_state=6).index, "unit_price"] = -5
 
@@ -315,10 +300,8 @@ def inject_quality_issues(products, warehouses, inventory, sales_orders, supplie
     bad_sales_idx = sales_orders.sample(n=5, random_state=8).index
     sales_orders.loc[bad_sales_idx, "quantity_delivered"] = sales_orders.loc[bad_sales_idx, "quantity_ordered"] + 50
 
-    # Outliers
     sales_orders.loc[sales_orders.sample(n=5, random_state=9).index, "quantity_ordered"] = 25000
 
-    # Duplicates
     inventory = pd.concat([inventory, inventory.sample(n=10, random_state=10)], ignore_index=True)
     sales_orders = pd.concat([sales_orders, sales_orders.sample(n=20, random_state=11)], ignore_index=True)
 
@@ -328,10 +311,12 @@ def inject_quality_issues(products, warehouses, inventory, sales_orders, supplie
 def save_dataset(df, filename):
     path = RAW_PATH / filename
     df.to_csv(path, index=False)
-    print(f"{filename} generated: {len(df)} rows")
+    print(f"✅ {filename} : {len(df)} lignes")
 
 
 def main():
+    print(f"📅 Période : {START_DATE.date()} → {TODAY.date()} ({DAYS_RANGE} jours)\n")
+
     suppliers = generate_suppliers()
     products = generate_products(suppliers)
     warehouses = generate_warehouses()
@@ -355,7 +340,7 @@ def main():
     save_dataset(alerts, "alerts.csv")
     save_dataset(calendar, "calendar.csv")
 
-    print("\nAll V2 datasets generated successfully in data/raw/")
+    print("\n✅ Tous les datasets générés dans data/raw/")
 
 
 if __name__ == "__main__":
