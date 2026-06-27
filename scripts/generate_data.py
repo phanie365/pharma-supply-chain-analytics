@@ -126,8 +126,8 @@ def generate_inventory(products, warehouses):
 
     inventory["expiry_date"] = expiry_dates
     inventory["last_inventory_update"] = [
-        TODAY - pd.Timedelta(days=int(x)) for x in np.random.randint(0, 30, n)
-    ]
+    TODAY - pd.Timedelta(days=int(x)) for x in np.random.randint(0, DAYS_RANGE, n)
+]
 
     return inventory
 
@@ -265,7 +265,9 @@ def generate_alerts(inventory, products, warehouses, suppliers):
 
     alerts["severity"] = alerts.apply(severity, axis=1)
     alerts["status"] = "Open"
-    alerts["created_at"] = TODAY
+    alerts["created_at"] = [
+    TODAY - pd.Timedelta(days=int(x)) for x in np.random.randint(0, DAYS_RANGE, len(alerts))
+]
     alerts["alert_id"] = [f"ALT{i:06d}" for i in range(1, len(alerts) + 1)]
 
     return alerts[[
